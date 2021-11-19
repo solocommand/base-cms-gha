@@ -58,11 +58,11 @@ jobs:
           {
             attachments: [{
               color: '#1d9bd1',
-              text: `Deployment of ${process.env.AS_REPO}-graphql-server @ ${{ needs.vars.outputs.version }} by ${process.env.AS_AUTHOR} has started.`,
+              text: `Deployment of ${{ env.IMAGE_NAME }} @ ${{ needs.vars.outputs.version }} has started.`,
             }]
           }
     - name: Deploy to Kubernetes
-      run: npx @endeavorb2b/rancher2cli dl basecms-service graphql-server ${{ needs.vars.outputs.image }}
+      run: npx @endeavorb2b/rancher2cli dl basecms-service graphql-server ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ needs.vars.outputs.version }}
       env:
         RANCHER_CLUSTERID: ${{ secrets.RANCHER_CLUSTERID_BASECMS }}
         RANCHER_TOKEN: ${{ secrets.RANCHER_TOKEN }}
@@ -76,6 +76,6 @@ jobs:
           {
             attachments: [{
               color: '${{ job.status }}' === 'success' ? 'good' : '${{ job.status }}' === 'failure' ? 'danger' : 'warning',
-              text: `Deployment of ${process.env.AS_REPO}-graphql-server @ ${{ needs.vars.outputs.version }} by ${process.env.AS_AUTHOR} ${{ job.status }} in ${process.env.AS_TOOK}`,
+              text: `Deployment of ${{ env.IMAGE_NAME }} @ ${{ needs.vars.outputs.version }} ${{ job.status }} in ${process.env.AS_TOOK}`,
             }]
           }
