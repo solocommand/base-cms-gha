@@ -1,0 +1,23 @@
+{
+  "name": "base-cms",
+  "description": "BaseCMS Monorepo",
+  "author": "Jacob Bare <jacob@parameter1.com>",
+  "private": true,
+  "repository": "https://github.com/parameter1/base-cms.git",
+  "workspaces": [
+    "packages/*",
+    "services/*"
+  ],
+  "scripts": {
+    "build": "lerna run build",
+    "test": "lerna run test",
+    "lint": "lerna run lint",
+    "compile": "lerna run compile"
+  },
+  "devDependencies": {
+    "eslint": "^5.16.0",
+    "eslint-config-airbnb-base": "^13.2.0",
+    "eslint-plugin-import": "^2.24.2",
+    "lerna": "^3.22.1"
+  }
+}
